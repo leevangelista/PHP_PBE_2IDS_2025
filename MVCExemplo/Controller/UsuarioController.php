@@ -21,12 +21,31 @@ class UsuarioController{
         exit;
     }
 
-    // ESTOU NO ARQUIVO UsuarioController.php
+    
     public function listarUsuarios(){
         $usuarios = Usuario::listar();
         echo "<pre>";
         print_r($usuarios);
         echo "</pre>";
         require 'View/usuarioListar.php';
+    }
+
+    public function telaEditar(){
+        $usuario = Usuario::buscar($_GET['id']);
+        require 'View/usuarioEditar.php';
+    }
+
+    // ESTOU NO ARQUIVO UsuarioController.php
+    public function atualizar(){
+        $usuario = new Usuario($_POST['nome'], $_POST['email']);
+        $usuario->atualizar($_GET['id']);
+        header('Location: /PHP_PBE_2IDS_2025/MVCExemplo/usuario/telaEditar?id='.($_GET['id']));
+        exit;
+    }
+
+    public function excluir(){
+        Usuario::excluir($_GET['id']);
+        header('Location: /PHP_PBE_2IDS_2025/MVCExemplo/usuario/listar');
+        exit;
     }
 }
