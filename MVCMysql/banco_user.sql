@@ -1,3 +1,4 @@
+create database mvc_usuario;
 use mvc_usuario;
 
 CREATE TABLE USUARIOS (
